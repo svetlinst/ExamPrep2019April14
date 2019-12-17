@@ -2,11 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using MortalEngines.Entities.Contracts;
     public abstract class BaseMachine : IMachine
     {
         private string name;
         private IPilot pilot;
+
+        public BaseMachine(string name, double attackPoints, double defencePoints, double healthPoints)
+        {
+            this.Name = name;
+            this.AttackPoints = attackPoints;
+            this.DefensePoints = defencePoints;
+            this.HealthPoints = healthPoints;
+        }
 
         public string Name
         {
@@ -54,6 +63,26 @@
                 target.HealthPoints = 0;
             }
             Targets.Add(target.Name);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"- {this.name}");     
+            sb.AppendLine($" * Type: {this.GetType()}");
+            sb.AppendLine($" *Health: {this.HealthPoints}");
+            sb.AppendLine($" *Attack: {this.AttackPoints}");
+            sb.AppendLine($" *Defense: {this.DefensePoints}");
+            sb.Append($" *Targets: ");
+            if (this.Targets.Count>0)
+            {
+                sb.AppendLine(string.Join(",",this.Targets));
+            }
+            else
+            {
+                sb.AppendLine("None");
+            }
+            return sb.ToString();
         }
     }
 }
