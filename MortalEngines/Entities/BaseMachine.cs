@@ -44,9 +44,9 @@
         }
         public double HealthPoints { get; set; }
 
-        public double AttackPoints { get; }
+        public double AttackPoints { get; protected set; }
 
-        public double DefensePoints { get; }
+        public double DefensePoints { get; protected set; }
 
         public IList<string> Targets { get; }
 
